@@ -231,7 +231,11 @@ Error message and password prompt
 
 <li>$:/state/toc/TableOfContents/backend-database--118161433</li>
 
+<li>$:/state/toc/TableOfContents/backend-devops--118161433</li>
+
 <li>$:/state/toc/TableOfContents/backend-environment--118161433</li>
+
+<li>$:/state/toc/TableOfContents/backend-MicroService--118161433</li>
 
 <li>$:/state/toc/TableOfContents/backend/database-mongoDB--118161433</li>
 
@@ -253,11 +257,15 @@ Error message and password prompt
 
 <li>database</li>
 
+<li>devops</li>
+
 <li>dubbo 服务本地调用</li>
 
 <li>dubbo服务间调用失败的一种情况</li>
 
 <li>environment</li>
+
+<li>harbor增加 https 支持</li>
 
 <li>Item2设置 ecs 自动登录</li>
 
@@ -14445,7 +14453,7 @@ Error message and password prompt
 <div created="20210621083029514" modified="20210621083042178" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20210714150259180" title="$:/state/tab/sidebar--595412856">
+<div created="20210621075738104" modified="20210724041442376" title="$:/state/tab/sidebar--595412856">
 <pre>TableOfContents</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
@@ -14466,10 +14474,16 @@ Error message and password prompt
 <div created="20210706095849631" modified="20210712153932209" title="$:/state/toc/TableOfContents/backend-database--118161433">
 <pre>open</pre>
 </div>
-<div created="20210706093928189" modified="20210707035931423" title="$:/state/toc/TableOfContents/backend-environment--118161433">
-<pre>close</pre>
+<div created="20210724041508308" modified="20210724041616946" title="$:/state/toc/TableOfContents/backend-devops--118161433">
+<pre>open</pre>
 </div>
-<div created="20210712154222226" modified="20210712154223204" title="$:/state/toc/TableOfContents/backend/database-mongoDB--118161433">
+<div created="20210706093928189" modified="20210724041438720" title="$:/state/toc/TableOfContents/backend-environment--118161433">
+<pre>open</pre>
+</div>
+<div created="20210724041439508" modified="20210724041439508" title="$:/state/toc/TableOfContents/backend-MicroService--118161433">
+<pre>open</pre>
+</div>
+<div created="20210712154222226" modified="20210724041437087" title="$:/state/toc/TableOfContents/backend/database-mongoDB--118161433">
 <pre>open</pre>
 </div>
 <div created="20210712154230543" modified="20210712154230543" title="$:/state/toc/TableOfContents/backend/database-postgresql--118161433">
@@ -14478,7 +14492,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210715030420196" list="mongo命令备忘 [[PG 命令备忘]] postgresql Welcome" modified="20210715031607285" title="$:/StoryList">
+<div list="[[harbor增加 https 支持]] devops Welcome" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14602,6 +14616,9 @@ Error message and password prompt
 <div created="20210706095742722" modified="20210706095848440" tags="database backend" title="database">
 <pre></pre>
 </div>
+<div created="20210724041448805" modified="20210724041505866" tags="devops backend" title="devops">
+<pre></pre>
+</div>
 <div created="20210628074136333" modified="20210628074811439" tags="dubbo" title="dubbo 服务本地调用">
 <pre>使用 dubbo 的时候，当程序既是消费者又是提供者的时候，服务会优先使用本地调用
 在程序启动的时候可以看到：
@@ -14683,6 +14700,22 @@ public class DubboDynamicPort implements ApplicationContextAware {
 </div>
 <div created="20210702170555039" modified="20210702170632714" tags="backend environment" title="environment">
 <pre></pre>
+</div>
+<div created="20210724041511291" modified="20210724041838808" tags="harbor devops" title="harbor增加 https 支持">
+<pre>遇到的问题
+
+当进行 docker login  登录的时候提示的 
+
+```
+Error response from daemon: Get https://xxxxx/v2/: error parsing HTTP 400 response body: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;400 The plain HTTP request was sent to HTTPS port&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;400 Bad Request&lt;/h1&gt;&lt;/center&gt;\r\n&lt;center&gt;The plain HTTP request was sent to HTTPS port&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.18.0 (Ubuntu)&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;
+```
+
+分析
+
+
+虽然使用了 https，但是并是不是原生使用 harbor的 https 机制，因此考虑直接使用 harbor 的机制
+
+</pre>
 </div>
 <div created="20210626170745703" modified="20210701033242777" tags="[[ item2]]" title="Item2设置 ecs 自动登录">
 <pre>在 profile 中点击Advanced,找到 Trriggers，点击 edit
