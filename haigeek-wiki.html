@@ -14453,8 +14453,8 @@ Error message and password prompt
 <div created="20210621083029514" modified="20210621083042178" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20210724041442376" title="$:/state/tab/sidebar--595412856">
-<pre>TableOfContents</pre>
+<div created="20210621075738104" modified="20210726015906513" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
 <pre>open</pre>
@@ -14492,7 +14492,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[harbor增加 https 支持]] devops Welcome" title="$:/StoryList">
+<div created="20210726021256268" list="[[harbor增加 https 支持]] Welcome" modified="20210726021256268" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14701,7 +14701,7 @@ public class DubboDynamicPort implements ApplicationContextAware {
 <div created="20210702170555039" modified="20210702170632714" tags="backend environment" title="environment">
 <pre></pre>
 </div>
-<div created="20210724041511291" modified="20210724041838808" tags="harbor devops" title="harbor增加 https 支持">
+<div created="20210724041511291" modified="20210726021333483" tags="harbor devops" title="harbor增加 https 支持">
 <pre>遇到的问题
 
 当进行 docker login  登录的时候提示的 
@@ -14713,7 +14713,54 @@ Error response from daemon: Get https://xxxxx/v2/: error parsing HTTP 400 respon
 分析
 
 
-虽然使用了 https，但是并是不是原生使用 harbor的 https 机制，因此考虑直接使用 harbor 的机制
+虽然使用了 https，但是并是不是原生使用 harbor的 https 机制，在 git 上有一个讨论：
+https://github.com/goharbor/harbor/issues/3114
+
+因此考虑直接使用 harbor原生支持的 https，具体设置步骤如下：
+
+一、申请 https 证书
+
+这里直接使用申请好的 let's 证书
+
+二、开启 harbor 的 https
+
+
+```
+https:
+  port: 443
+  certificate: /etc/letsencrypt/live/xxx/fullchain.pem
+  private_key: /etc/letsencrypt/live/xxx/privkey.key
+```
+
+在 harbor的配置文件 harbor.yml 里，打开配置项，并配置好证书所在的位置
+
+三、重新生成配置文件
+
+在harbor 文件夹指定命令生成docker-compose 文件
+
+```
+./prepare
+
+```
+
+在这一步里，harbor 会将我们的证书拷贝到位置`/data/secret/cert`并将此位置在nginx 程序启动的时候进行映射。在后续证书到期的时候只需要替换此位置的证书文件即可。
+
+四、重启 harbor 应用
+
+先停止正在运行的程序
+
+```
+docker-compose down
+```
+
+启动
+
+
+```
+docker-compose up -d
+
+```
+
 
 </pre>
 </div>
