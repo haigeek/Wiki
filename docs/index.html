@@ -269,6 +269,8 @@ Error message and password prompt
 
 <li>environment</li>
 
+<li>firewalled 防火墙</li>
+
 <li>harbor增加 https 支持</li>
 
 <li>Item2设置 ecs 自动登录</li>
@@ -14503,7 +14505,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210802122704929" list="[[centos 设置静态ip]] [[Linux 命令备忘]] Welcome" modified="20210802122704929" title="$:/StoryList">
+<div created="20210803072723907" list="[[Linux 命令备忘]] [[firewalled 防火墙]] Welcome" modified="20210803072723907" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14715,6 +14717,16 @@ public class DubboDynamicPort implements ApplicationContextAware {
 <div created="20210702170555039" modified="20210702170632714" tags="backend environment" title="environment">
 <pre></pre>
 </div>
+<div created="20210803071848032" modified="20210803072721421" tags="Linux" title="firewalled 防火墙">
+<pre>防火墙状态
+
+firewall-cmd --state
+
+firewall-cmd --zone=public --add-port=端口号/tcp --permanent
+
+systemctl restart firewalld.service
+</pre>
+</div>
 <div created="20210724041511291" modified="20210726021333483" tags="harbor devops" title="harbor增加 https 支持">
 <pre>遇到的问题
 
@@ -14822,14 +14834,19 @@ dig _acme-challenge.tuyuansu.com.cn txt
 <div created="20210731025944787" modified="20210731030018822" tags="Linux backend" title="Linux">
 <pre></pre>
 </div>
-<div created="20210731025815398" modified="20210731030009080" tags="Linux" title="Linux 命令备忘">
+<div created="20210731025815398" modified="20210803072737483" tags="Linux" title="Linux 命令备忘">
 <pre>查找文件夹
 
 find / -type d -iname &quot;文件夹名称&quot;
 
 查找文件
 
-find / -iname &quot;文件名&quot;</pre>
+find / -iname &quot;文件名&quot;
+
+后台运行sh 命令
+
+nohup sh startup.sh &gt; bslic.out 2&gt;&amp;1 &amp;
+</pre>
 </div>
 <div created="20210625033254609" modified="20210625033328956" tags="Linux" title="Linux环境搭建备忘">
 <pre></pre>
