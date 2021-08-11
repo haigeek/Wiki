@@ -243,6 +243,8 @@ Error message and password prompt
 
 <li>$:/state/toc/TableOfContents/backend/database-postgresql--118161433</li>
 
+<li>$:/state/toc/TableOfContents/backend/environment-wireguard--118161433</li>
+
 <li>$:/status/RequireReloadDueToPluginChange</li>
 
 <li>$:/StoryList</li>
@@ -14481,14 +14483,14 @@ Error message and password prompt
 <div created="20210706093926310" modified="20210731025939784" title="$:/state/toc/TableOfContents-backend--118161433">
 <pre>open</pre>
 </div>
-<div created="20210706095849631" modified="20210731025932470" title="$:/state/toc/TableOfContents/backend-database--118161433">
-<pre>close</pre>
+<div created="20210706095849631" modified="20210811061707024" title="$:/state/toc/TableOfContents/backend-database--118161433">
+<pre>open</pre>
 </div>
-<div created="20210724041508308" modified="20210731025942287" title="$:/state/toc/TableOfContents/backend-devops--118161433">
-<pre>close</pre>
+<div created="20210724041508308" modified="20210810024313696" title="$:/state/toc/TableOfContents/backend-devops--118161433">
+<pre>open</pre>
 </div>
-<div created="20210706093928189" modified="20210731025941791" title="$:/state/toc/TableOfContents/backend-environment--118161433">
-<pre>close</pre>
+<div created="20210706093928189" modified="20210810024314287" title="$:/state/toc/TableOfContents/backend-environment--118161433">
+<pre>open</pre>
 </div>
 <div created="20210802122703929" modified="20210802122703929" title="$:/state/toc/TableOfContents/backend-Linux--118161433">
 <pre>open</pre>
@@ -14502,10 +14504,13 @@ Error message and password prompt
 <div created="20210712154230543" modified="20210712154230543" title="$:/state/toc/TableOfContents/backend/database-postgresql--118161433">
 <pre>open</pre>
 </div>
+<div created="20210810024315895" modified="20210810024315895" title="$:/state/toc/TableOfContents/backend/environment-wireguard--118161433">
+<pre>open</pre>
+</div>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210803072723907" list="[[Linux 命令备忘]] [[firewalled 防火墙]] Welcome" modified="20210803072723907" title="$:/StoryList">
+<div created="20210810024315025" list="[[PG 命令备忘]] database [[wireguard 客户机配置]] wireguard Welcome" modified="20210811061708360" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14881,7 +14886,7 @@ mongorestore --gzip --archive=dbname.gz --nsFrom &quot;olddbname.*&quot; --nsTo 
 <div created="20210706095758562" modified="20210706095822942" tags="mongoDB database" title="mongoDB">
 <pre></pre>
 </div>
-<div created="20210715030423206" modified="20210715030708835" tags="postgresql" title="PG 命令备忘">
+<div created="20210715030423206" modified="20210811062425504" tags="postgresql" title="PG 命令备忘">
 <pre>数据的导出与导入
 
 1、导出整个数据库
@@ -14897,6 +14902,10 @@ pg_dump  -U  username  -d dbname -f  /var/lib/postgresql/data/backup/xxx.sql
 psql  -U  username -d  dbname  -f  /var/lib/postgresql/data/backup/xxx.sql 
 ```
 
+
+导出某个模式的数据
+
+pg_dump  -U  bicp  -d bicp -n collie -f  /var/lib/postgresql/data/bak/collie-20210811.sql
 </pre>
 </div>
 <div created="20210712154024000" modified="20210712154242023" tags="postgresql" title="pg修改最大连接数">
