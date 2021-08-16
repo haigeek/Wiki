@@ -189,8 +189,6 @@ Error message and password prompt
 
 <li>$:/state/image-picker/system-2042070162</li>
 
-<li>$:/state/Link/-1512590584/search</li>
-
 <li>$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375</li>
 
 <li>$:/state/search-list/selected-item--874113614</li>
@@ -259,6 +257,8 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla/options/sidebarlayout</li>
 
+<li>设置 dubbo 在 docker 下暴露的服务地址</li>
+
 <li>backend</li>
 
 <li>centos 设置静态ip</li>
@@ -266,6 +266,8 @@ Error message and password prompt
 <li>database</li>
 
 <li>devops</li>
+
+<li>Draft of 'dubbo服务间调用失败的一种情况'</li>
 
 <li>dubbo 服务本地调用</li>
 
@@ -14425,16 +14427,13 @@ Error message and password prompt
 <div created="20210625032810465" modified="20210625032812624" title="$:/state/image-picker/system-2042070162">
 <pre>hide</pre>
 </div>
-<div created="20210628074413297" modified="20210628074414450" title="$:/state/Link/-1512590584/search">
-<pre></pre>
-</div>
 <div created="20210621075707006" modified="20210621075707006" title="$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375">
 <pre>contents</pre>
 </div>
 <div created="20210811114013938" modified="20210811114014489" title="$:/state/search-list/selected-item--874113614">
 <pre>mongo命令备忘-primaryList</pre>
 </div>
-<div created="20210621083029514" modified="20210621083042178" title="$:/state/search/currentTab">
+<div created="20210621083029514" modified="20210816154128671" title="$:/state/search/currentTab">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
 <div created="20210623154222172" modified="20210625032721679" title="$:/state/showeditpreview">
@@ -14467,10 +14466,10 @@ Error message and password prompt
 <div created="20210623160021031" modified="20210706100157824" title="$:/state/tab/moresidebar-1850697562">
 <pre>$:/core/ui/MoreSideBar/Tags</pre>
 </div>
-<div created="20210621083029514" modified="20210621083042178" title="$:/state/tab/search-results/sidebar">
+<div created="20210621083029514" modified="20210816154128671" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20210811062439573" title="$:/state/tab/sidebar--595412856">
+<div created="20210621075738104" modified="20210816161059170" title="$:/state/tab/sidebar--595412856">
 <pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
@@ -14488,8 +14487,8 @@ Error message and password prompt
 <div created="20210706093926310" modified="20210731025939784" title="$:/state/toc/TableOfContents-backend--118161433">
 <pre>open</pre>
 </div>
-<div created="20210706095849631" modified="20210811061707024" title="$:/state/toc/TableOfContents/backend-database--118161433">
-<pre>open</pre>
+<div created="20210706095849631" modified="20210816081044983" title="$:/state/toc/TableOfContents/backend-database--118161433">
+<pre>close</pre>
 </div>
 <div created="20210724041508308" modified="20210810024313696" title="$:/state/toc/TableOfContents/backend-devops--118161433">
 <pre>open</pre>
@@ -14500,8 +14499,8 @@ Error message and password prompt
 <div created="20210802122703929" modified="20210802122703929" title="$:/state/toc/TableOfContents/backend-Linux--118161433">
 <pre>open</pre>
 </div>
-<div created="20210724041439508" modified="20210731030011216" title="$:/state/toc/TableOfContents/backend-MicroService--118161433">
-<pre>close</pre>
+<div created="20210724041439508" modified="20210816081048414" title="$:/state/toc/TableOfContents/backend-MicroService--118161433">
+<pre>open</pre>
 </div>
 <div created="20210712154222226" modified="20210724041437087" title="$:/state/toc/TableOfContents/backend/database-mongoDB--118161433">
 <pre>open</pre>
@@ -14515,7 +14514,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210810024315025" list="mongo命令备忘 [[Linux 命令备忘]] [[PG 命令备忘]] database [[wireguard 客户机配置]] wireguard Welcome" modified="20210811114014724" title="$:/StoryList">
+<div created="20210816081049145" list="dubbo服务间调用失败的一种情况 [[设置 dubbo 在 docker 下暴露的服务地址]] [[Draft of 'dubbo服务间调用失败的一种情况']] Welcome" modified="20210816161052080" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14633,6 +14632,98 @@ Error message and password prompt
 <div created="20210621081239032" modified="20210621081239032" title="$:/themes/tiddlywiki/vanilla/options/sidebarlayout">
 <pre>fluid-fixed</pre>
 </div>
+<div created="20210816081153237" modified="20210816161110042" tags="dubbo MicroService" title="设置 dubbo 在 docker 下暴露的服务地址">
+<pre>
+
+!!场景
+* 有 202和203两台服务器， 服务器之间是可以通信的。
+* 现需要使用 docker 部署几个后端服务（A、B），服务间使用 dubbo 的RPC 进行通信。
+* 后端微服务使用 nacos 作为注册中心，使用 springCloudAlibaba 作为微服务框架。
+
+!! 问题
+在 docker 里 dubbo 默认获取到的 ip 是容器内的 ip，A服务作为支撑服务，B 服务主动订阅 A服务。由于 A 和B 分别部署在不同的服务器上，导致 B 服务在进行 RPC 调用的时候请求的服务地址是 A服务所在容器的 ip 地址，B 无法访问
+
+!! 处理思路
+
+将A 服务暴露出来的服务地址使用 A服务器的宿主机 ip，这样 B 服务在请求的时候直接请求A 服务器的 ip，理论上是可以正常通信。
+
+参考 dubbo 的[[文档|https://dubbo.apache.org/zh/docs/advanced/set-host/]]，提供了几个参数：
+
+```
+DUBBO_IP_TO_REGISTRY — 注册到注册中心的ip地址
+DUBBO_PORT_TO_REGISTRY — 注册到注册中心的port端口
+DUBBO_IP_TO_BIND — 监听ip地址
+DUBBO_PORT_TO_BIND — 监听port端口
+```
+
+按照官网的说明：
+
+
+&lt;&lt;&lt;
+PORT_TO_REGISTRY 或 IP_TO_REGISTRY 不会用作默认 PORT_TO_BIND 或 IP_TO_BIND，但是反过来是成立的
+
+&lt;&lt;&lt;
+
+测试1：在 docker 启动命令加上 `-e DUBBO_PORT_TO_BIND=20800 -e DUBBO_IP_TO_BIND 192.168.1.184`  
+
+使用此命令程序无法启动并报错无法使用指定的地址：
+
+```
+Failed to bind NettyServer on /192.168.1.184:20880, cause: Cannot assign requested address
+```
+
+测试2：在 docker 启动命令加上 `-p 20881:20880 -e DUBBO_PORT_TO_REGISTRY=20800 -e DUBBO_IP_TO_REGISTRY 192.168.1.184`   启动成功，在 nacos 查看服务注册情况：
+
+发现dubbo 的元数据服务对外暴露的 ip 和端口按照设置的参数设置(打码的位置)，但是其他 dubbo 服务依旧是自动获取 ip 和端口。
+
+[img[https://gitee.com/haigeek/picture/raw/master/uPic/udF12x.png]]
+
+此方案是按照[[ dubbo 的官方 docker demo 的 readme|https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-docker ]]测试的
+
+测试 B 服务调用 A 服务，截取部分错误：
+
+```
+ Tried 3 times of the providers [172.18.0.3:20881] (1/1) from the registry 10.74.37.204:9090 on the consumer 172.18.0.3 using the dubbo version 2.7.8. Last error is: Failed to invoke remote method: getUserAttach, provider: dubbo://172.18.0.3:20881/
+```
+可以看到B 服务认为 A 服务暴露的地址为：172.18.0.3:20881 这里的 ip 依然为容器的 ip 端口为设置的端口。
+
+
+!! 最终解决方式
+
+目的是为了告诉 B服务在调用 A 服务时使用宿主机 ip，且在通过 -e DUBBO_IP_TO_BIND 参数无法指定，判断应该是springCloudAlibaba与 nacos 的结合和传统的 dubbo 应用有一些区别，在 dubbo 的 [[issues|https://github.com/apache/dubbo/issues/6235]] 下发现类型的问题。解决方案是直接在配置文件指定 nacos 的 ip，服务在进行调用的时候会使用这个 ip 进行调用，具体配置如下：
+
+```
+spring:
+  cloud:
+    nacos:
+      discovery:
+        ip: xxxx.203 ## A 服务的宿主机 ip
+        port: 20880
+```
+
+启动参数：
+
+`-p 20800 -e DUBBO_IP_TO_REGISTRY=192.168.1.184 -e DUBBO_PORT_TO_BIND=20880
+`
+
+注册到 nacos 的服务地址：
+
+[img[https://gitee.com/haigeek/picture/raw/master/uPic/WfZ1eV.png]]
+
+区别在于注册到 nacos 里的服务 ip 不再是容器内部 ip 而是在配置文件里指定的 ip，经测试 B 服务成功调用 A 服务
+
+参考地址：
+
+&lt;&lt;&lt;
+
+https://dubbo.apache.org/zh/docs/advanced/set-host/
+https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-docker
+https://github.com/apache/dubbo/issues/6235
+&lt;&lt;&lt;
+
+
+</pre>
+</div>
 <div created="20210702165919680" modified="20210702171203163" tags="backend TableOfContents" title="backend" type="text/vnd.tiddlywiki">
 <pre></pre>
 </div>
@@ -14644,6 +14735,71 @@ Error message and password prompt
 </div>
 <div created="20210724041448805" modified="20210724041505866" tags="devops backend" title="devops">
 <pre></pre>
+</div>
+<div created="20210628102355264" draft.of="dubbo服务间调用失败的一种情况" draft.title="dubbo服务间调用失败的一种情况" modified="20210816155732381" tags="dubbo MicroService" title="Draft of 'dubbo服务间调用失败的一种情况'">
+<pre>!!正常情况
+当服务启动的时候会获取到一个 port 用于通信，配置文件指定的是-1
+
+```
+dubbo
+  protocol:
+    name: dubbo
+    port: -1
+```
+然后dubbo 使用-1获取到了一个随机端口用于服务暴露也就是 bind.port属性，如图：
+[img[https://gitee.com/haigeek/picture/raw/master/uPic/duiWgX.png]]
+当所有服务暴露完成后，springcloud 会将元数据服务开始暴露到 nacos 中，如图所示
+[img[https://gitee.com/haigeek/picture/raw/master/uPic/VM5uiV.png]]
+在暴露这个服务的时候正常情况下也是用之前获取到的随机端口，我这里是20881
+
+!! 一种错误情况
+
+发现在 nacos 里暴露的服务里port 和服务在进行注册的时候使用的端口不一致，导致服务间调用失败，调用错误：
+
+```
+org.apache.dubbo.remoting.RemotingException: Not found exported service: com.tys.xdata.map3d.api.service.ILandService:63402 in [map3d-union/com.alibaba.cloud.dubbo.service.DubboMetadataService:1.0.0:63402, com.tys.xdata.map3d.api.service.IObjectService:20881, com.tys.xdata.map3d.api.service.ILandService:20881], may be version or group mismatch 
+```
+问题就出在这里，请求所需的是`ILandService:63402 `但是存在的只有`ILandService:20881`
+
+
+nacos注册的情况如下：
+[img[https://gitee.com/haigeek/picture/raw/master/uPic/YHvbna.png]]
+此时 port 是63402，因此可以确定的是 dubbo 在进行服务端调用的时候用的是 nacos 注册所使用的这个端口，但是实际上在此时在 nacos 暴露的端口是 dubbo 元数据服务使用的端口，但是提供者暴露出去的服务端口却是20081
+
+进一步排查一次启动为何会出现两个不同的端口。最终发现在我们自己的开发框架里，还有一个配置类是配置 dubbo 暴露端口的，但是我们通过配置文件使用-1也指定了随机端口。因为 bean 加载顺序的原因，但是程序在最初先使用了-1获取到了一个随机端口，此时配置 bean 生效，又生成了一次端口，而 duubo 的元数据服务是在最后一步进行暴露的，在暴露的时候使用了新生成的随机端口，也就导致了上述情况。
+
+
+```java
+@Component
+public class DubboDynamicPort implements ApplicationContextAware {
+    private ApplicationContext applicationContext;
+    private int port = 20880;
+
+    public DubboDynamicPort() {
+    }
+
+    @PostConstruct
+    public void init() {
+        Map&lt;String, ProtocolConfig&gt; map = this.applicationContext.getBeansOfType(ProtocolConfig.class);
+        Iterator var2 = map.entrySet().iterator();
+
+        while(var2.hasNext()) {
+            Entry&lt;String, ProtocolConfig&gt; con = (Entry)var2.next();
+            this.port = NetUtils.getAvailablePort();
+            ((ProtocolConfig)con.getValue()).setPort(this.port);
+        }
+
+    }
+
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+}
+```
+
+取消此 bean 的注入，问题解决。
+
+</pre>
 </div>
 <div created="20210628074136333" modified="20210628074811439" tags="dubbo" title="dubbo 服务本地调用">
 <pre>使用 dubbo 的时候，当程序既是消费者又是提供者的时候，服务会优先使用本地调用
