@@ -193,6 +193,8 @@ Error message and password prompt
 
 <li>$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375</li>
 
+<li>$:/state/search-list/selected-item--874113614</li>
+
 <li>$:/state/search/currentTab</li>
 
 <li>$:/state/showeditpreview</li>
@@ -14429,6 +14431,9 @@ Error message and password prompt
 <div created="20210621075707006" modified="20210621075707006" title="$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375">
 <pre>contents</pre>
 </div>
+<div created="20210811114013938" modified="20210811114014489" title="$:/state/search-list/selected-item--874113614">
+<pre>mongo命令备忘-primaryList</pre>
+</div>
 <div created="20210621083029514" modified="20210621083042178" title="$:/state/search/currentTab">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
@@ -14465,8 +14470,8 @@ Error message and password prompt
 <div created="20210621083029514" modified="20210621083042178" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20210731025828359" title="$:/state/tab/sidebar--595412856">
-<pre>TableOfContents</pre>
+<div created="20210621075738104" modified="20210811062439573" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
 <pre>open</pre>
@@ -14510,7 +14515,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210810024315025" list="[[PG 命令备忘]] database [[wireguard 客户机配置]] wireguard Welcome" modified="20210811061708360" title="$:/StoryList">
+<div created="20210810024315025" list="mongo命令备忘 [[Linux 命令备忘]] [[PG 命令备忘]] database [[wireguard 客户机配置]] wireguard Welcome" modified="20210811114014724" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14859,7 +14864,7 @@ nohup sh startup.sh &gt; bslic.out 2&gt;&amp;1 &amp;
 <div created="20210707035944191" modified="20210707040014035" tags="MicroService backend" title="MicroService">
 <pre></pre>
 </div>
-<div created="20210714144244839" modified="20210715031818352" tags="mongoDB" title="mongo命令备忘">
+<div created="20210714144244839" modified="20210815110410464" tags="mongoDB" title="mongo命令备忘">
 <pre>使用 shell 连接某个数据库进行操作
 
 ```
@@ -14880,6 +14885,20 @@ mongodump -d dbname --gzip --archive=dbname.gz --authenticationDatabase=admin --
 ```
 mongorestore --gzip --archive=dbname.gz --nsFrom &quot;olddbname.*&quot; --nsTo &quot;newdbname.*&quot;  --nsInclude &quot;*&quot; --authenticationDatabase=admin --username username --password xxx
 ```
+
+导出某个集合
+
+
+```
+mongodump -h 192.168.1.184:32001 -d bicp_asc -c asc_region --username bicp_asc --password xxxxx  --authenticationDatabase=admin --gzip --archive=/Users/haigeek/Downloads/asc20210811.gz
+```
+导入某个集合
+
+```
+mongorestore -d bicp_asc -c asc_region --username bicp --password xdata@2021  --authenticationDatabase=admin --gzip --archive=asc20210811.gz
+```
+
+
 
 </pre>
 </div>
