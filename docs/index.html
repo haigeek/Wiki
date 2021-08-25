@@ -267,8 +267,6 @@ Error message and password prompt
 
 <li>devops</li>
 
-<li>Draft of 'dubbo服务间调用失败的一种情况'</li>
-
 <li>dubbo 服务本地调用</li>
 
 <li>dubbo服务间调用失败的一种情况</li>
@@ -14514,7 +14512,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210821043040520" list="[[Linux 命令备忘]] Welcome" modified="20210821043040520" title="$:/StoryList">
+<div created="20210825061053021" list="dubbo服务间调用失败的一种情况 Welcome" modified="20210825061053021" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14633,8 +14631,7 @@ Error message and password prompt
 <pre>fluid-fixed</pre>
 </div>
 <div created="20210816081153237" modified="20210816161110042" tags="dubbo MicroService" title="设置 dubbo 在 docker 下暴露的服务地址">
-<pre>
-!!场景
+<pre>!!场景
 * 有 202和203两台服务器， 服务器之间是可以通信的。
 * 现需要使用 docker 部署几个后端服务（A、B），服务间使用 dubbo 的RPC 进行通信。
 * 后端微服务使用 nacos 作为注册中心，使用 springCloudAlibaba 作为微服务框架。
@@ -14735,71 +14732,6 @@ https://github.com/apache/dubbo/issues/6235
 <div created="20210724041448805" modified="20210724041505866" tags="devops backend" title="devops">
 <pre></pre>
 </div>
-<div created="20210628102355264" draft.of="dubbo服务间调用失败的一种情况" draft.title="dubbo服务间调用失败的一种情况" modified="20210816155732381" tags="dubbo MicroService" title="Draft of 'dubbo服务间调用失败的一种情况'">
-<pre>!!正常情况
-当服务启动的时候会获取到一个 port 用于通信，配置文件指定的是-1
-
-```
-dubbo
-  protocol:
-    name: dubbo
-    port: -1
-```
-然后dubbo 使用-1获取到了一个随机端口用于服务暴露也就是 bind.port属性，如图：
-[img[https://gitee.com/haigeek/picture/raw/master/uPic/duiWgX.png]]
-当所有服务暴露完成后，springcloud 会将元数据服务开始暴露到 nacos 中，如图所示
-[img[https://gitee.com/haigeek/picture/raw/master/uPic/VM5uiV.png]]
-在暴露这个服务的时候正常情况下也是用之前获取到的随机端口，我这里是20881
-
-!! 一种错误情况
-
-发现在 nacos 里暴露的服务里port 和服务在进行注册的时候使用的端口不一致，导致服务间调用失败，调用错误：
-
-```
-org.apache.dubbo.remoting.RemotingException: Not found exported service: com.tys.xdata.map3d.api.service.ILandService:63402 in [map3d-union/com.alibaba.cloud.dubbo.service.DubboMetadataService:1.0.0:63402, com.tys.xdata.map3d.api.service.IObjectService:20881, com.tys.xdata.map3d.api.service.ILandService:20881], may be version or group mismatch 
-```
-问题就出在这里，请求所需的是`ILandService:63402 `但是存在的只有`ILandService:20881`
-
-
-nacos注册的情况如下：
-[img[https://gitee.com/haigeek/picture/raw/master/uPic/YHvbna.png]]
-此时 port 是63402，因此可以确定的是 dubbo 在进行服务端调用的时候用的是 nacos 注册所使用的这个端口，但是实际上在此时在 nacos 暴露的端口是 dubbo 元数据服务使用的端口，但是提供者暴露出去的服务端口却是20081
-
-进一步排查一次启动为何会出现两个不同的端口。最终发现在我们自己的开发框架里，还有一个配置类是配置 dubbo 暴露端口的，但是我们通过配置文件使用-1也指定了随机端口。因为 bean 加载顺序的原因，但是程序在最初先使用了-1获取到了一个随机端口，此时配置 bean 生效，又生成了一次端口，而 duubo 的元数据服务是在最后一步进行暴露的，在暴露的时候使用了新生成的随机端口，也就导致了上述情况。
-
-
-```java
-@Component
-public class DubboDynamicPort implements ApplicationContextAware {
-    private ApplicationContext applicationContext;
-    private int port = 20880;
-
-    public DubboDynamicPort() {
-    }
-
-    @PostConstruct
-    public void init() {
-        Map&lt;String, ProtocolConfig&gt; map = this.applicationContext.getBeansOfType(ProtocolConfig.class);
-        Iterator var2 = map.entrySet().iterator();
-
-        while(var2.hasNext()) {
-            Entry&lt;String, ProtocolConfig&gt; con = (Entry)var2.next();
-            this.port = NetUtils.getAvailablePort();
-            ((ProtocolConfig)con.getValue()).setPort(this.port);
-        }
-
-    }
-
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
-}
-```
-
-取消此 bean 的注入，问题解决。
-
-</pre>
-</div>
 <div created="20210628074136333" modified="20210628074811439" tags="dubbo" title="dubbo 服务本地调用">
 <pre>使用 dubbo 的时候，当程序既是消费者又是提供者的时候，服务会优先使用本地调用
 在程序启动的时候可以看到：
@@ -14814,7 +14746,7 @@ scope=“remote”
 ```
 </pre>
 </div>
-<div created="20210628102355264" modified="20210707040038500" tags="dubbo MicroService" title="dubbo服务间调用失败的一种情况">
+<div created="20210628102355264" modified="20210825061100717" tags="dubbo MicroService" title="dubbo服务间调用失败的一种情况">
 <pre>!!正常情况
 当服务启动的时候会获取到一个 port 用于通信，配置文件指定的是-1
 
