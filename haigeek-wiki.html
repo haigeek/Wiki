@@ -269,6 +269,8 @@ Error message and password prompt
 
 <li>Draft of 'spring'</li>
 
+<li>Draft of 'vim命令备忘'</li>
+
 <li>dubbo 服务本地调用</li>
 
 <li>dubbo服务间调用失败的一种情况</li>
@@ -297,6 +299,8 @@ Error message and password prompt
 
 <li>mongoDB</li>
 
+<li>pem证书转换为pcks12</li>
+
 <li>PG 命令备忘</li>
 
 <li>pg修改最大连接数</li>
@@ -314,6 +318,8 @@ Error message and password prompt
 <li>TableOfContents</li>
 
 <li>TiddltWiki语法</li>
+
+<li>vim命令备忘</li>
 
 <li>VPN 工具之 wireguard</li>
 
@@ -14419,8 +14425,8 @@ Error message and password prompt
 <div created="20210702164925211" modified="20210702164925211" title="$:/state/folded/$:/AdvancedSearch">
 <pre>hide</pre>
 </div>
-<div created="20210625033056312" modified="20210625033056312" title="$:/state/folded/Let's Encrypt 泛域名证书申请">
-<pre>hide</pre>
+<div created="20210625033056312" modified="20210915061000079" title="$:/state/folded/Let's Encrypt 泛域名证书申请">
+<pre>show</pre>
 </div>
 <div created="20210702163932697" modified="20210702164925211" title="$:/state/folded/supermap-iobject创建图层缓存错误">
 <pre>show</pre>
@@ -14473,8 +14479,8 @@ Error message and password prompt
 <div created="20210621083029514" modified="20210816154128671" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20210903140642552" title="$:/state/tab/sidebar--595412856">
-<pre>TableOfContents</pre>
+<div created="20210621075738104" modified="20210915012858214" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
 <pre>open</pre>
@@ -14518,7 +14524,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210903141103309" list="spring-session的flush(刷新)模式 [[Draft of 'spring']] Welcome" modified="20210903141103309" title="$:/StoryList">
+<div created="20210915012908760" list="pem证书转换为pcks12 [[Let's Encrypt 泛域名证书申请]] [[Draft of 'vim命令备忘']] Linux环境搭建备忘 Linux [[Linux 命令备忘]] Welcome" modified="20210915060913483" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14741,6 +14747,16 @@ https://github.com/apache/dubbo/issues/6235
 <div created="20210903140658505" draft.of="spring" draft.title="spring" modified="20210903140755912" tags="backend spring" title="Draft of 'spring'">
 <pre></pre>
 </div>
+<div created="20210915013005233" draft.of="vim命令备忘" draft.title="vim命令备忘" modified="20210915060945836" tags="Linux" title="Draft of 'vim命令备忘'">
+<pre>全文替换
+
+把全文的所有“最”替换成“第二
+
+```
+:%s/最/第二/g 
+```
+</pre>
+</div>
 <div created="20210628074136333" modified="20210628074811439" tags="dubbo" title="dubbo 服务本地调用">
 <pre>使用 dubbo 的时候，当程序既是消费者又是提供者的时候，服务会优先使用本地调用
 在程序启动的时候可以看到：
@@ -14911,7 +14927,7 @@ chown -R jenkins /var/lib/jenkins/.docker
 参考：https://blog.csdn.net/mydeman/article/details/79042848
 </pre>
 </div>
-<div created="20210625030857232" modified="20210625032938847" tags="https" title="Let's Encrypt 泛域名证书申请">
+<div created="20210625030857232" modified="20210915061054134" tags="https" title="Let's Encrypt 泛域名证书申请">
 <pre>开始申请证书
 
 ```
@@ -14935,7 +14951,13 @@ dig _acme-challenge.tuyuansu.com.cn txt
 最后会在默认路径下生成证书
 `/etc/letsencrypt/live`+域名名称文件夹
 文件夹下会有几个文件：
-[img[https://gitee.com/haigeek/picture/raw/master/uPic/mo1yih.png]]</pre>
+[img[https://gitee.com/haigeek/picture/raw/master/uPic/mo1yih.png]]
+
+需要续签证书时重新执行申请即可
+
+```
+certbot certonly --manual --preferred-challenge dns -d *.tuyuansu.com.cn
+```</pre>
 </div>
 <div created="20210731025944787" modified="20210731030018822" tags="Linux backend" title="Linux">
 <pre></pre>
@@ -15005,6 +15027,27 @@ mongorestore -d bicp_asc -c asc_region --username bicp --password xdata@2021  --
 </div>
 <div created="20210706095758562" modified="20210706095822942" tags="mongoDB database" title="mongoDB">
 <pre></pre>
+</div>
+<div created="20210915074939525" modified="20210915075141705" tags="https" title="pem证书转换为pcks12">
+<pre>
+```
+openssl pkcs12 -export -in cert.pem -inkey privkey.pem -password pass:xdata_ssl -out collie-2.p12
+```
+
+在spring-cloud-gateway的配置
+
+```
+server:
+  ssl:
+    enabled: true
+    #key-alias: collie
+    key-store-password: xdata_ssl
+    key-store: file:/root/collie-2.p12
+    key-store-type: PKCS12
+```
+
+需要注意这里的别名如果在生产的时候没有设置那么就不能配置，否则会提示no cipher suites in common 验证不能通过
+</pre>
 </div>
 <div created="20210715030423206" modified="20210811062425504" tags="postgresql" title="PG 命令备忘">
 <pre>数据的导出与导入
@@ -15139,6 +15182,16 @@ apt-get install qt5-default
 </div>
 <div created="20210625032956363" modified="20210625033145134" tags="" title="TiddltWiki语法">
 <pre>https://mindxtrain.com/tiddlywiki%E7%9A%84%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</pre>
+</div>
+<div created="20210915013005233" modified="20210915013058950" tags="Linux" title="vim命令备忘">
+<pre>全文替换
+
+把全文的所有“最”替换成“第二
+
+```
+:%s/最/第二/g 
+```
+</pre>
 </div>
 <div created="20210623154558567" modified="20210623160955842" tags="wireguard vpn" title="VPN 工具之 wireguard">
 <pre>* [[wireguard 客户机配置]]</pre>
