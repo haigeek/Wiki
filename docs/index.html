@@ -14524,7 +14524,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210915012908760" list="pem证书转换为pcks12 [[Let's Encrypt 泛域名证书申请]] [[Draft of 'vim命令备忘']] Linux环境搭建备忘 Linux [[Linux 命令备忘]] Welcome" modified="20210915060913483" title="$:/StoryList">
+<div created="20210916065539800" list="[[harbor增加 https 支持]] Welcome" modified="20210916065539800" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14849,7 +14849,7 @@ firewall-cmd --zone=public --add-port=端口号/tcp --permanent
 systemctl restart firewalld.service
 </pre>
 </div>
-<div created="20210724041511291" modified="20210726021333483" tags="harbor devops" title="harbor增加 https 支持">
+<div created="20210724041511291" modified="20210916073437949" tags="harbor devops" title="harbor增加 https 支持">
 <pre>遇到的问题
 
 当进行 docker login  登录的时候提示的 
@@ -14909,7 +14909,24 @@ docker-compose up -d
 
 ```
 
+证书到期处理
 
+使用let's 生成的证书需要先进行转换 转换命令
+
+privkey.pem转私钥
+
+
+```
+openssl rsa -in privkey.pem -out server.key
+
+```
+
+fullchain.pem  转crt
+
+```
+openssl x509 -in fullchain.pem -out server.crt
+```
+生成之后拷贝到路径`/data/secret/cert` 重启nginx即可
 </pre>
 </div>
 <div created="20210626170745703" modified="20210701033242777" tags="[[ item2]]" title="Item2设置 ecs 自动登录">
@@ -15029,8 +15046,7 @@ mongorestore -d bicp_asc -c asc_region --username bicp --password xdata@2021  --
 <pre></pre>
 </div>
 <div created="20210915074939525" modified="20210915075141705" tags="https" title="pem证书转换为pcks12">
-<pre>
-```
+<pre>```
 openssl pkcs12 -export -in cert.pem -inkey privkey.pem -password pass:xdata_ssl -out collie-2.p12
 ```
 
