@@ -267,9 +267,7 @@ Error message and password prompt
 
 <li>devops</li>
 
-<li>Draft of 'spring'</li>
-
-<li>Draft of 'vim命令备忘'</li>
+<li>docker-registry 应用</li>
 
 <li>dubbo 服务本地调用</li>
 
@@ -14524,7 +14522,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210916065539800" list="[[harbor增加 https 支持]] Welcome" modified="20210916065539800" title="$:/StoryList">
+<div created="20210917155432532" list="[[docker-registry 应用]] Welcome" modified="20210917155432532" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14744,17 +14742,65 @@ https://github.com/apache/dubbo/issues/6235
 <div created="20210724041448805" modified="20210724041505866" tags="devops backend" title="devops">
 <pre></pre>
 </div>
-<div created="20210903140658505" draft.of="spring" draft.title="spring" modified="20210903140755912" tags="backend spring" title="Draft of 'spring'">
-<pre></pre>
-</div>
-<div created="20210915013005233" draft.of="vim命令备忘" draft.title="vim命令备忘" modified="20210915060945836" tags="Linux" title="Draft of 'vim命令备忘'">
-<pre>全文替换
+<div created="20210917154032997" modified="20210917155540581" tags="devops docker-registry" title="docker-registry 应用" type="">
+<pre>registry 配置
 
-把全文的所有“最”替换成“第二
 
+```yml
+version: 0.1
+log:
+  fields:
+    service: registry
+storage:
+  delete:
+    enabled: true
+  cache:
+    blobdescriptor: inmemory
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  addr: :5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+    Access-Control-Allow-Origin: ['*']
+    Access-Control-Allow-Methods: ['HEAD', 'GET', 'OPTIONS', 'DELETE']
+    Access-Control-Allow-Headers: ['Authorization', 'Accept']
+    Access-Control-Max-Age: [1728000]
+    Access-Control-Allow-Credentials: [true]
+    Access-Control-Expose-Headers: ['Docker-Content-Digest']
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
 ```
-:%s/最/第二/g 
+
+
+启动registry
+
+
+```shell
+docker run -d  --name registry-srv --restart=always -p 12315:5000 -v /mnt/d/docker-data/infrastructure/registry:/var/lib/registry -v /mnt/d/docker-data/infrastructure/registry-config.yml:/etc/docker/registry/config.yml registry
 ```
+
+启动registry-ui
+
+
+```shell
+docker run -d --name docker-registry-ui -p 12316:80 -e REGISTRY_TITLE=TYS Docker Registry -e REGISTRY_URL=http://192.168.1.184:12315 -e SINGLE_REGISTRY=true joxit/docker-registry-ui:latest
+```
+
+此容器设置允许删除清理镜像
+
+```shell
+docker run -d --name docker-registry-ui -p 12316:80 -e REGISTRY_TITLE=TYS Docker Registry -e REGISTRY_URL=http://192.168.1.184:12315 -e SINGLE_REGISTRY=true joxit/docker-registry-ui:latest
+```
+
+通过界面删除的数据只是解除了关联，数据依旧在磁盘上存储，因此需要在容器内执行垃圾清理
+
+执行垃圾清理命令
+
+registry garbage-collect /etc/docker/registry/config.yml
 </pre>
 </div>
 <div created="20210628074136333" modified="20210628074811439" tags="dubbo" title="dubbo 服务本地调用">
@@ -15199,7 +15245,7 @@ apt-get install qt5-default
 <div created="20210625032956363" modified="20210625033145134" tags="" title="TiddltWiki语法">
 <pre>https://mindxtrain.com/tiddlywiki%E7%9A%84%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</pre>
 </div>
-<div created="20210915013005233" modified="20210915013058950" tags="Linux" title="vim命令备忘">
+<div created="20210915013005233" modified="20210917154454008" tags="Linux" title="vim命令备忘">
 <pre>全文替换
 
 把全文的所有“最”替换成“第二
