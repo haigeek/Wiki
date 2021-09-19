@@ -179,6 +179,8 @@ Error message and password prompt
 
 <li>$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.23/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.23/index.html/$:/plugins/tiddlywiki/codemirror</li>
 
+<li>$:/state/dropdown/keyboardshortcut/superscript-286565879</li>
+
 <li>$:/state/folded/$:/AdvancedSearch</li>
 
 <li>$:/state/folded/Let's Encrypt 泛域名证书申请</li>
@@ -316,6 +318,8 @@ Error message and password prompt
 <li>TableOfContents</li>
 
 <li>TiddltWiki语法</li>
+
+<li>tiddly快捷键</li>
 
 <li>vim命令备忘</li>
 
@@ -14420,6 +14424,9 @@ Error message and password prompt
 <div created="20210621081619024" modified="20210621081619024" title="$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.23/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.23/index.html/$:/plugins/tiddlywiki/codemirror">
 <pre>yes</pre>
 </div>
+<div created="20210918161305229" modified="20210918161306433" title="$:/state/dropdown/keyboardshortcut/superscript-286565879">
+<pre>close</pre>
+</div>
 <div created="20210702164925211" modified="20210702164925211" title="$:/state/folded/$:/AdvancedSearch">
 <pre>hide</pre>
 </div>
@@ -14447,7 +14454,7 @@ Error message and password prompt
 <div created="20210623154222172" modified="20210625032721679" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20210621075845947" modified="20210706101738565" title="$:/state/sidebar">
+<div created="20210621075845947" modified="20210918160806069" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20210621075620857" modified="20210623160032594" title="$:/state/tab--1418380610">
@@ -14465,8 +14472,8 @@ Error message and password prompt
 <div created="20210623160022852" modified="20210625030700443" title="$:/state/tab-1163638994">
 <pre>$:/core/ui/MoreSideBar/Plugins/Languages</pre>
 </div>
-<div created="20210621075540931" modified="20210702163441707" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/Info</pre>
+<div created="20210621075540931" modified="20210918161241011" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/KeyboardShortcuts</pre>
 </div>
 <div created="20210625033103455" modified="20210625033108774" title="$:/state/tab-219299817">
 <pre>$:/core/ui/TiddlerInfo/Advanced</pre>
@@ -14477,8 +14484,8 @@ Error message and password prompt
 <div created="20210621083029514" modified="20210816154128671" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20210915012858214" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20210621075738104" modified="20210918161329873" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Open</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
 <pre>open</pre>
@@ -14522,7 +14529,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210917155432532" list="[[docker-registry 应用]] Welcome" modified="20210917155432532" title="$:/StoryList">
+<div created="20210918161237512" list="tiddly快捷键 [[docker-registry 应用]] $:/ControlPanel Welcome" modified="20210918161333476" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14742,7 +14749,7 @@ https://github.com/apache/dubbo/issues/6235
 <div created="20210724041448805" modified="20210724041505866" tags="devops backend" title="devops">
 <pre></pre>
 </div>
-<div created="20210917154032997" modified="20210917155540581" tags="devops docker-registry" title="docker-registry 应用" type="">
+<div created="20210917154032997" modified="20210918162209333" tags="devops docker-registry" title="docker-registry 应用" type="">
 <pre>registry 配置
 
 
@@ -14773,35 +14780,122 @@ health:
     enabled: true
     interval: 10s
     threshold: 3
+auth:
+  htpasswd:
+    realm: Registry Realm
+    path: /auth/htpasswd
+```
+
+开启认证
+
+生成认证文件
+在要生成文件的文件路径执行
+
+
+```
+docker run \
+  --entrypoint htpasswd \
+  httpd:2 -Bbn admin Xc@2021@Registry*() &gt; registry-auth/htpasswd
+```
+
+最终会在registry-auth下生成认证文件
+
+!! 开启https
+
+使用nginx代理使仓库支持https
+需要做以下配置：
+
+1、配置反向代理
+
+核心代码
+
+```
+ proxy_pass                  http://docker-registry;
+ proxy_set_header  Host              $http_host;   # required for docker client's sake
+proxy_set_header  X-Real-IP         $remote_addr; # pass on real client's IP
+proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
+proxy_set_header  X-Forwarded-Proto $scheme;
+proxy_read_timeout                  900;
+```
+其中 `proxy_set_header  X-Forwarded-Proto $scheme; `必须存在，否则在push 镜像的时候会出现协议错误的问题
+
+
+```
+error parsing HTTP 400 response body: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;400 The plain HTTP request was sent to HTTPS port&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;400 Bad Request&lt;/h1&gt;&lt;/center&gt;\r\n&lt;center&gt;The plain HTTP request was sent to HTTPS port&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.18.0 (Ubuntu)&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;
+```
+
+2、配置请求body大小
+
+默认nginx请求的时候会有请求体大小限制 ，如果不进行配置会提示
+
+
+```
+error parsing HTTP 413 response body: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.18.0 (Ubuntu)&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;
+```
+
+在nginx设置请求体大小即可
+
+```
+http {
+        client_max_body_size 300M;
+}
+
+```
+
+启动registry与registry-ui
+当独立启动registry和registry-ui时，且开启BaseAuth认证时，在registry-ui不能进行删除操作，详见源仓库的[[讨论|https://github.com/Joxit/docker-registry-ui/issues/104]]，因此使用代理模式启动，参考[[说明|https://github.com/Joxit/docker-registry-ui/issues/104]]
+
+最终使用的docker-compose文件如下：
+
+```yml
+version: '2.0'
+services:
+  registry:
+    image: registry
+    container_name: registry
+    ports:
+      - 12316:5000
+    volumes:
+      - /mnt/d/docker-data/infrastructure/registry:/var/lib/registry
+      - /mnt/d/docker-data/infrastructure/registry-config.yml:/etc/docker/registry/config.yml
+      - /mnt/d/docker-data/infrastructure/registry-auth:/auth
+    networks:
+      - registry-ui-net
+
+  ui:
+    image: joxit/docker-registry-ui:latest
+    container_name: docker-registry-ui
+    ports:
+      - 12317:80
+    environment:
+      - REGISTRY_TITLE=TYS-Docker-Registry
+      - NGINX_PROXY_PASS_URL=http://registry:5000
+      - DELETE_IMAGES=true
+      - SINGLE_REGISTRY=true
+    depends_on:
+      - registry
+    networks:
+      - registry-ui-net
+networks:
+  registry-ui-net:
+
 ```
 
 
-启动registry
 
-
-```shell
-docker run -d  --name registry-srv --restart=always -p 12315:5000 -v /mnt/d/docker-data/infrastructure/registry:/var/lib/registry -v /mnt/d/docker-data/infrastructure/registry-config.yml:/etc/docker/registry/config.yml registry
-```
-
-启动registry-ui
-
-
-```shell
-docker run -d --name docker-registry-ui -p 12316:80 -e REGISTRY_TITLE=TYS Docker Registry -e REGISTRY_URL=http://192.168.1.184:12315 -e SINGLE_REGISTRY=true joxit/docker-registry-ui:latest
-```
-
-此容器设置允许删除清理镜像
-
-```shell
-docker run -d --name docker-registry-ui -p 12316:80 -e REGISTRY_TITLE=TYS Docker Registry -e REGISTRY_URL=http://192.168.1.184:12315 -e SINGLE_REGISTRY=true joxit/docker-registry-ui:latest
-```
 
 通过界面删除的数据只是解除了关联，数据依旧在磁盘上存储，因此需要在容器内执行垃圾清理
 
 执行垃圾清理命令
 
+
+```
 registry garbage-collect /etc/docker/registry/config.yml
-</pre>
+```
+
+
+
+参考链接：https://docs.docker.com/registry/deploying/#more-advanced-authentication</pre>
 </div>
 <div created="20210628074136333" modified="20210628074811439" tags="dubbo" title="dubbo 服务本地调用">
 <pre>使用 dubbo 的时候，当程序既是消费者又是提供者的时候，服务会优先使用本地调用
@@ -15244,6 +15338,16 @@ apt-get install qt5-default
 </div>
 <div created="20210625032956363" modified="20210625033145134" tags="" title="TiddltWiki语法">
 <pre>https://mindxtrain.com/tiddlywiki%E7%9A%84%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</pre>
+</div>
+<div created="20210918162211854" modified="20210918162710791" tags="tiddly" title="tiddly快捷键">
+<pre>* 1-6标题 ctrl 1-6
+* 插入代码code ctrl+m
+* 插入代码块 ctrl+shift+m
+* 插入链接 alt+shift+l
+* 插入符号清单 ctrl+shift+l
+* 插入数字清单 ctrl+shift+m
+
+</pre>
 </div>
 <div created="20210915013005233" modified="20210917154454008" tags="Linux" title="vim命令备忘">
 <pre>全文替换
