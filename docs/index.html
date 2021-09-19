@@ -14454,7 +14454,7 @@ Error message and password prompt
 <div created="20210623154222172" modified="20210625032721679" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20210621075845947" modified="20210918160806069" title="$:/state/sidebar">
+<div created="20210621075845947" modified="20210919091748369" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20210621075620857" modified="20210623160032594" title="$:/state/tab--1418380610">
@@ -14484,8 +14484,8 @@ Error message and password prompt
 <div created="20210621083029514" modified="20210816154128671" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20210918161329873" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Open</pre>
+<div created="20210621075738104" modified="20210919041805705" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
 <pre>open</pre>
@@ -14529,7 +14529,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210918161237512" list="tiddly快捷键 [[docker-registry 应用]] $:/ControlPanel Welcome" modified="20210918161333476" title="$:/StoryList">
+<div created="20210919041807146" list="[[docker-registry 应用]] Welcome" modified="20210919041807146" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14749,7 +14749,7 @@ https://github.com/apache/dubbo/issues/6235
 <div created="20210724041448805" modified="20210724041505866" tags="devops backend" title="devops">
 <pre></pre>
 </div>
-<div created="20210917154032997" modified="20210918162209333" tags="devops docker-registry" title="docker-registry 应用" type="">
+<div created="20210917154032997" modified="20210919165515619" tags="devops docker-registry" title="docker-registry 应用" type="">
 <pre>registry 配置
 
 
@@ -14892,6 +14892,13 @@ networks:
 ```
 registry garbage-collect /etc/docker/registry/config.yml
 ```
+
+使用定时任务进行清理
+
+```
+docker exec registry sh registry garbage-collect /etc/docker/registry/config.yml  --delete-untagged=true
+```
+其中 --delete-untagged=true表示清除没有tag的镜像
 
 
 
