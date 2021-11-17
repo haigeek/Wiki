@@ -315,6 +315,8 @@ Error message and password prompt
 
 <li>spring-session的flush(刷新)模式</li>
 
+<li>ssh config</li>
+
 <li>SuperMap iobject 安装</li>
 
 <li>supermap-iobject创建图层缓存错误</li>
@@ -14458,8 +14460,8 @@ Error message and password prompt
 <div created="20210623154222172" modified="20210625032721679" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20210621075845947" modified="20211026030242556" title="$:/state/sidebar">
-<pre>no</pre>
+<div created="20210621075845947" modified="20211117021017361" title="$:/state/sidebar">
+<pre>yes</pre>
 </div>
 <div created="20210621075620857" modified="20210623160032594" title="$:/state/tab--1418380610">
 <pre>$:/core/ui/ControlPanel/Plugins/Add/Plugins</pre>
@@ -14533,7 +14535,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211026025332635" list="图谱知识梳理 tiddly快捷键 [[centos 设置静态ip]] Welcome" modified="20211026025438952" title="$:/StoryList">
+<div created="20211117021024037" list="[[ssh config]] [[Linux 命令备忘]] Welcome" modified="20211117021024037" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15298,6 +15300,23 @@ IMMEDIATE: 实时同步session 数据到redis. 当执行`SessionRepository.creat
 
 web系统登录，验证码自动过期依赖此特性。将验证码放在session中，并设置定时过期，需要session的Attribute能即时生效。
 </pre>
+</div>
+<div created="20211117021033325" modified="20211117021754059" tags="Linux" title="ssh config">
+<pre> 生成密钥
+
+ssh-keygen -t rsa
+
+上传到目标服务器
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub username@server -p 22
+
+配置.ssh 文件夹下的 config 文件
+
+Host &lt;any name here&gt;
+    HostName &lt;your server address&gt;
+    Port &lt;22&gt;
+    User &lt;username&gt;
+    IdentityFile ~/.ssh/id_rsa</pre>
 </div>
 <div created="20210626170531775" modified="20210705123227391" tags="supermap iobject" title="SuperMap iobject 安装">
 <pre>在安装许可驱动的时候，可能会提示：
