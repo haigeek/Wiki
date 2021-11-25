@@ -143,7 +143,11 @@ Error message and password prompt
 
 <li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/close-all</li>
 
+<li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/encryption</li>
+
 <li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home</li>
+
+<li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/save-wiki</li>
 
 <li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/storyview</li>
 
@@ -207,6 +211,8 @@ Error message and password prompt
 
 <li>$:/state/tab--2112689675</li>
 
+<li>$:/state/tab--276882940</li>
+
 <li>$:/state/tab--86143343</li>
 
 <li>$:/state/tab-1163638994</li>
@@ -264,6 +270,8 @@ Error message and password prompt
 <li>设置 dubbo 在 docker 下暴露的服务地址</li>
 
 <li>图谱知识梳理</li>
+
+<li>网址导航</li>
 
 <li>backend</li>
 
@@ -356,8 +364,14 @@ Error message and password prompt
 <div created="20210706101539463" modified="20210706101539464" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/close-all">
 <pre>show</pre>
 </div>
+<div created="20211125005217785" modified="20211125005433855" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/encryption">
+<pre>hide</pre>
+</div>
 <div created="20210623153939364" modified="20210623153939364" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home">
 <pre>show</pre>
+</div>
+<div created="20211125005223578" modified="20211125005223578" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/save-wiki">
+<pre>hide</pre>
 </div>
 <div created="20210623153946779" modified="20210623153950828" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/storyview">
 <pre>hide</pre>
@@ -14472,13 +14486,16 @@ Error message and password prompt
 <div created="20210702163816629" modified="20210702163817164" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
 </div>
+<div created="20211125004532279" modified="20211125004833831" title="$:/state/tab--276882940">
+<pre>$:/core/ui/TiddlerInfo/Advanced</pre>
+</div>
 <div created="20210621075639807" modified="20210621081532172" title="$:/state/tab--86143343">
 <pre>$:/core/ui/ControlPanel/Plugins/Installed/Plugins</pre>
 </div>
 <div created="20210623160022852" modified="20210625030700443" title="$:/state/tab-1163638994">
 <pre>$:/core/ui/MoreSideBar/Plugins/Languages</pre>
 </div>
-<div created="20210621075540931" modified="20210918161241011" title="$:/state/tab-1749438307">
+<div created="20210621075540931" modified="20211125004858628" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/KeyboardShortcuts</pre>
 </div>
 <div created="20210625033103455" modified="20210625033108774" title="$:/state/tab-219299817">
@@ -14490,8 +14507,8 @@ Error message and password prompt
 <div created="20210621083029514" modified="20210816154128671" title="$:/state/tab/search-results/sidebar">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
-<div created="20210621075738104" modified="20211026025359188" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/More</pre>
+<div created="20210621075738104" modified="20211125005201016" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Tools</pre>
 </div>
 <div created="20210702165736199" modified="20210702165822435" title="$:/state/toc/目录-环境搭建--174201155">
 <pre>open</pre>
@@ -14535,7 +14552,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211117021024037" list="[[ssh config]] [[Linux 命令备忘]] Welcome" modified="20211117021024037" title="$:/StoryList">
+<div created="20211125004314920" list="图谱知识梳理 网址导航 Welcome" modified="20211125004837077" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14746,11 +14763,40 @@ https://github.com/apache/dubbo/issues/6235
 
 </pre>
 </div>
-<div created="20211026025719050" modified="20211029065349616" tags="[[ tys]] govern" title="图谱知识梳理">
+<div created="20211026025719050" modified="20211125005438176" tags="[[ tys]] govern" title="图谱知识梳理">
 <pre>获取全周期的轴数据
 /govern/rest/plotmeta/list/?display=false&amp;region=
 根据业务查询接口
 govern/rest/query/projects/page
+</pre>
+</div>
+<div created="20211125004318084" modified="20211125010147628" tags="其他" title="网址导航">
+<pre>! 公司环境
+
+!! 工具
+jenKins http://192.168.1.184:8889/
+
+nacos: http://192.168.1.184:32002/nacos
+
+portainer: http://192.168.1.184:9000
+
+!! 基线
+
+罐子云：http://192.168.1.184:10100/
+
+!! 象山
+
+portainer： http://10.34.104.220:9000/
+
+nacos: http://10.34.104.220:8848/nacos/
+
+前端：http://10.34.104.220:10100/
+
+后端：http://10.34.104.220:10200/swagger-ui/index.html
+
+
+
+
 </pre>
 </div>
 <div created="20210702165919680" modified="20210702171203163" tags="backend TableOfContents" title="backend" type="text/vnd.tiddlywiki">
