@@ -277,6 +277,8 @@ Error message and password prompt
 
 <li>centos 设置静态ip</li>
 
+<li>centos openssh 升级</li>
+
 <li>database</li>
 
 <li>devops</li>
@@ -14556,7 +14558,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211203100835568" list="devops docker [[Docker-Compose 自动创建的网桥与局域网冲突解决方案]] Welcome" modified="20211203100835568" title="$:/StoryList">
+<div created="20211208082829482" list="[[centos openssh 升级]] [[firewalled 防火墙]] [[centos 设置静态ip]] Welcome" modified="20211208101004700" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14814,6 +14816,79 @@ nacos: http://10.34.104.220:8848/nacos/
 
 ```
 nameserver 114.114.114.114
+```
+</pre>
+</div>
+<div created="20211208142706351" modified="20211208143447507" tags="Linux" title="centos openssh 升级">
+<pre>
+安装必要依赖 
+
+```
+yum install -y gcc openssl-devel pam-devel rpm-build 
+
+```
+
+下载
+
+```
+wget https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.1p1.tar.gz
+
+```
+解压
+
+```
+tar -zxvf openssh-8.1p1.tar.gz
+cd openssh-8.1p1
+```
+
+编译
+
+```
+./configure --prefix=/usr --sysconfdir=/etc/ssh --with-pam --with-zlib --with-md5-passwords --with-tcp-wrappers
+```
+
+
+```
+make &amp;&amp; make install
+
+```
+
+安装完成后会出现服务无法启动
+
+
+```
+Failed to start OpenSSH Server daemon
+```
+重新生成 key
+
+
+```
+ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+
+ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key
+
+ssh-keygen -t dsa -f /etc/ssh/ssh_host_ed25519_key
+```
+
+开启允许 root 登录
+
+
+```
+vim /etc/ssh/sshd_config
+
+```
+
+
+```
+PermitRootLogin yes
+
+```
+
+最后重启服务
+
+
+```
+service sshd restart
 ```
 </pre>
 </div>
@@ -15092,14 +15167,61 @@ public class DubboDynamicPort implements ApplicationContextAware {
 <div created="20210702170555039" modified="20210702170632714" tags="backend environment" title="environment">
 <pre></pre>
 </div>
-<div created="20210803071848032" modified="20210803072721421" tags="Linux" title="firewalled 防火墙">
+<div created="20210803071848032" modified="20211208142701513" tags="Linux" title="firewalled 防火墙">
 <pre>防火墙状态
 
+```
 firewall-cmd --state
 
+```
+
+增加端口
+
+```
 firewall-cmd --zone=public --add-port=端口号/tcp --permanent
 
+```
+
+移除端口
+
+```
+firewall-cmd --remove-port=80/tcp --permanent
+
+```
+
+
+```
+--permanent 代表永久
+```
+
+
+查看端口是否支持
+
+```
+firewall-cmd --query-port=22/tcp
+
+```
+
+查看已经开放的端口
+
+```
+firewall-cmd --list-ports
+
+```
+
+重新载入配置
+
+```
+firewall-cmd --reload      
+
+```
+
+重启服务
+
+```
 systemctl restart firewalld.service
+
+```
 </pre>
 </div>
 <div created="20210724041511291" modified="20210916073437949" tags="harbor devops" title="harbor增加 https 支持">
