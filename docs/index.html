@@ -197,8 +197,6 @@ Error message and password prompt
 
 <li>$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375</li>
 
-<li>$:/state/search-list/selected-item--874113614</li>
-
 <li>$:/state/search/currentTab</li>
 
 <li>$:/state/showeditpreview</li>
@@ -14487,9 +14485,6 @@ Error message and password prompt
 <div created="20210621075707006" modified="20210621075707006" title="$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375">
 <pre>contents</pre>
 </div>
-<div created="20210811114013938" modified="20210811114014489" title="$:/state/search-list/selected-item--874113614">
-<pre>mongo命令备忘-primaryList</pre>
-</div>
 <div created="20210621083029514" modified="20210816154128671" title="$:/state/search/currentTab">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
@@ -14577,7 +14572,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20220704072452305" list="prometheus devops Welcome" modified="20220704072452305" title="$:/StoryList">
+<div created="20220705021655112" list="[[centos 设置静态ip]] [[Let's Encrypt 泛域名证书申请]] [[harbor增加 https 支持]] Welcome" modified="20220705080004861" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -14696,8 +14691,7 @@ Error message and password prompt
 <pre>fluid-fixed</pre>
 </div>
 <div created="20220620075602182" modified="20220620082435181" tags="[[ tys]]" title="耕保地址" type="">
-<pre>
-[[嘉兴内|https://zrzyhghj6.jiaxing.gov.cn:20100/plotchainmap/bhgdyjs/viewer/62480b589d751cc5ff07b317]] 
+<pre>[[嘉兴内|https://zrzyhghj6.jiaxing.gov.cn:20100/plotchainmap/bhgdyjs/viewer/62480b589d751cc5ff07b317]] 
 [[桐乡|http://10.41.17.101:10100/plotchainmap/bhgdyjs-tx/viewer/61445adf13477b76362c4d92]]</pre>
 </div>
 <div created="20211026025630794" modified="20211026025714490" tags="[[ tys]]" title="工作笔记">
@@ -14858,7 +14852,7 @@ firewall-cmd --direct --get-all-rules
 <div created="20210702165919680" modified="20210702171203163" tags="backend TableOfContents" title="backend" type="text/vnd.tiddlywiki">
 <pre></pre>
 </div>
-<div created="20210802122710873" modified="20211011123422155" tags="Linux" title="centos 设置静态ip">
+<div created="20210802122710873" modified="20220706101250674" tags="Linux" title="centos 设置静态ip">
 <pre>https://blog.csdn.net/johnnycode/article/details/40624403
 
 设置dns
@@ -14867,6 +14861,29 @@ firewall-cmd --direct --get-all-rules
 ```
 nameserver 114.114.114.114
 ```
+
+ubuntu系统的 dns 会被定期重置
+
+修改/etc/systemd/resolved.conf
+
+```
+[Resolve]
+DNS=114.114.114.114 192.168.1.1
+```
+
+
+修改之后依次：
+
+```
+sudo systemctl restart systemd-resolved
+sudo systemctl enable systemd-resolved
+ 
+sudo mv /etc/resolv.conf  /etc/resolv.conf.bak
+sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+```
+
+
 </pre>
 </div>
 <div created="20211208142706351" modified="20211210022026720" tags="Linux" title="centos openssh 升级">
