@@ -14572,7 +14572,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20220705021655112" list="[[centos 设置静态ip]] [[Let's Encrypt 泛域名证书申请]] [[harbor增加 https 支持]] Welcome" modified="20220705080004861" title="$:/StoryList">
+<div created="20220713020113980" list="[[firewalled 防火墙]] Welcome" modified="20220713020113980" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15285,7 +15285,7 @@ public class DubboDynamicPort implements ApplicationContextAware {
 <div created="20210702170555039" modified="20210702170632714" tags="backend environment" title="environment">
 <pre></pre>
 </div>
-<div created="20210803071848032" modified="20220519013125340" tags="Linux" title="firewalled 防火墙">
+<div created="20210803071848032" modified="20220714074814764" tags="Linux" title="firewalled 防火墙">
 <pre>防火墙状态
 
 ```
@@ -15354,7 +15354,14 @@ firewall-cmd --reload
 -I INPUT means to insert a netfilter rule for incoming packets to host
 -i docker0 means packets from docker0 interface of the host
 -j ACCEPT means accept all packets since a protocol is not defined it implies that packets of any protocol are welcome.
-</pre>
+
+
+
+firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p ICMP --icmp-type timestamp-request -m comment --comment &quot;deny ICMP timestamp&quot; -j DROP
+
+firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p ICMP --icmp-type timestamp-reply -m comment --comment &quot;deny ICMP timestamp&quot; -j DROP
+
+firewall-cmd --direct --get-all-rules</pre>
 </div>
 <div created="20210724041511291" modified="20210916073437949" tags="harbor devops" title="harbor增加 https 支持">
 <pre>遇到的问题
