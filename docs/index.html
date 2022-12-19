@@ -14579,7 +14579,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20221214012919171" list="[[redis key 事件监听]] backend Welcome" modified="20221214012931656" title="$:/StoryList">
+<div created="20221218034531673" list="[[wireguard 客户机配置]] nas下wireguard的配置 Welcome" modified="20221218034537580" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15824,7 +15824,7 @@ netsh interface ipv4 show excludedportrange protocol=tcp</pre>
 <div created="20210706094719995" modified="20210706094757719" tags="wireguard environment" title="wireguard">
 <pre></pre>
 </div>
-<div created="20210621083035303" modified="20210706094807376" tags="vpn wireguard 目录" title="wireguard 客户机配置">
+<div created="20210621083035303" modified="20221218035247553" tags="vpn wireguard 目录" title="wireguard 客户机配置" type="">
 <pre> 生成客户端配置文件
 
 ```
@@ -15851,6 +15851,21 @@ EOF
 ```
 sudo wg set wg0 peer ${public-key} allowed-ips 10.1.0.4/32
 
+```
+
+ubuntu 安装
+
+```
+apt install wireguard
+## 编辑/etc/wireguard/wg0.conf
+## 启动
+systemctl start wg-quick@wg0
+```
+
+Linux 上设置客户端自动启动
+
+```
+systemctl ebable wg-quick@wg0
 ```
 
 
