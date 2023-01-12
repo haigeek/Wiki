@@ -327,6 +327,8 @@ Error message and password prompt
 
 <li>nas下wireguard的配置</li>
 
+<li>neo4j 数据备份与还原</li>
+
 <li>pem证书转换为pcks12</li>
 
 <li>PG 命令备忘</li>
@@ -14495,7 +14497,7 @@ Error message and password prompt
 <div created="20210623154222172" modified="20210625032721679" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20210621075845947" modified="20211117021017361" title="$:/state/sidebar">
+<div created="20210621075845947" modified="20230112021554321" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20210621075620857" modified="20210623160032594" title="$:/state/tab--1418380610">
@@ -14570,8 +14572,8 @@ Error message and password prompt
 <div created="20210712154222226" modified="20221214012928997" title="$:/state/toc/TableOfContents/backend/database-mongoDB--118161433">
 <pre>close</pre>
 </div>
-<div created="20210712154230543" modified="20221214012930741" title="$:/state/toc/TableOfContents/backend/database-postgresql--118161433">
-<pre>open</pre>
+<div created="20210712154230543" modified="20230112015616903" title="$:/state/toc/TableOfContents/backend/database-postgresql--118161433">
+<pre>close</pre>
 </div>
 <div created="20210810024315895" modified="20210810024315895" title="$:/state/toc/TableOfContents/backend/environment-wireguard--118161433">
 <pre>open</pre>
@@ -14579,7 +14581,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20221218034531673" list="[[wireguard 客户机配置]] nas下wireguard的配置 Welcome" modified="20221218034537580" title="$:/StoryList">
+<div created="20230112015618246" list="tiddly快捷键 [[neo4j 数据备份与还原]] database Welcome" modified="20230112021600857" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15599,6 +15601,37 @@ AllowedIPs = 10.1.0.0/24
 Endpoint = 39.101.177.202:16000 #gateway 公网ip和端口
 PersistentKeepalive = 10 # 心跳时间
 ```
+</pre>
+</div>
+<div created="20230112015622923" modified="20230112060701857" tags="database neo4j" title="neo4j 数据备份与还原">
+<pre>neo4j不能备份正在使用的数据库，会提示
+
+```
+The database is in use. Stop database 'neo4j' and try again.
+```
+修改neo4j.conf 中
+
+```
+## 修改为其他
+dbms.default_database=neo4j
+```
+
+
+--备份
+
+neo4j-admin dump --database=neo4j --to /data/neo4j20230112.dump
+
+--恢复
+
+
+```
+## 在恢复之前也需要先修改默认数据库为其他
+##导入到 ne04j
+neo4j-admin load --from=data/neo4j20230112.dump --force
+```
+
+
+
 </pre>
 </div>
 <div created="20210915074939525" modified="20211007070245759" tags="https" title="pem证书转换为pcks12">
