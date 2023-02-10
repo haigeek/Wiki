@@ -297,6 +297,10 @@ Error message and password prompt
 
 <li>docker-registry 应用</li>
 
+<li>Draft of 'database'</li>
+
+<li>Draft of 'docker'</li>
+
 <li>dubbo 服务本地调用</li>
 
 <li>dubbo服务间调用失败的一种情况</li>
@@ -304,6 +308,10 @@ Error message and password prompt
 <li>environment</li>
 
 <li>firewalled 防火墙</li>
+
+<li>Geoserver 部署</li>
+
+<li>gis</li>
 
 <li>harbor增加 https 支持</li>
 
@@ -14545,28 +14553,28 @@ Error message and password prompt
 <div created="20210702170708941" modified="20210702170720643" title="$:/state/toc/目录/backend-environment--174201155">
 <pre>open</pre>
 </div>
-<div created="20210706093926310" modified="20221214012923598" title="$:/state/toc/TableOfContents-backend--118161433">
+<div created="20210706093926310" modified="20230209144613104" title="$:/state/toc/TableOfContents-backend--118161433">
 <pre>open</pre>
 </div>
-<div created="20210706095849631" modified="20221214012927333" title="$:/state/toc/TableOfContents/backend-database--118161433">
+<div created="20210706095849631" modified="20230209143834564" title="$:/state/toc/TableOfContents/backend-database--118161433">
+<pre>close</pre>
+</div>
+<div created="20210724041508308" modified="20230209143841989" title="$:/state/toc/TableOfContents/backend-devops--118161433">
+<pre>close</pre>
+</div>
+<div created="20221214012705719" modified="20230209144704814" title="$:/state/toc/TableOfContents/backend-docker--118161433">
 <pre>open</pre>
-</div>
-<div created="20210724041508308" modified="20221214012713839" title="$:/state/toc/TableOfContents/backend-devops--118161433">
-<pre>close</pre>
-</div>
-<div created="20221214012705719" modified="20221214012706207" title="$:/state/toc/TableOfContents/backend-docker--118161433">
-<pre>close</pre>
 </div>
 <div created="20210706093928189" modified="20221214012708559" title="$:/state/toc/TableOfContents/backend-environment--118161433">
 <pre>close</pre>
 </div>
-<div created="20210802122703929" modified="20221214012736959" title="$:/state/toc/TableOfContents/backend-Linux--118161433">
+<div created="20210802122703929" modified="20230209143844237" title="$:/state/toc/TableOfContents/backend-Linux--118161433">
 <pre>close</pre>
 </div>
-<div created="20210724041439508" modified="20220620075553766" title="$:/state/toc/TableOfContents/backend-MicroService--118161433">
+<div created="20210724041439508" modified="20230209143845489" title="$:/state/toc/TableOfContents/backend-MicroService--118161433">
 <pre>close</pre>
 </div>
-<div created="20220620075554942" modified="20221214012704071" title="$:/state/toc/TableOfContents/backend-spring--118161433">
+<div created="20220620075554942" modified="20230209144452228" title="$:/state/toc/TableOfContents/backend-spring--118161433">
 <pre>close</pre>
 </div>
 <div created="20210712154222226" modified="20221214012928997" title="$:/state/toc/TableOfContents/backend/database-mongoDB--118161433">
@@ -14581,7 +14589,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20230112015618246" list="tiddly快捷键 [[neo4j 数据备份与还原]] database Welcome" modified="20230112021600857" title="$:/StoryList">
+<div created="20230209143857188" list="[[docker 日志配置]] [[Draft of 'docker']] backend devops database [[Geoserver 部署]] [[Draft of 'database']] gis Welcome" modified="20230209144705818" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15212,6 +15220,12 @@ docker exec registry sh registry garbage-collect /etc/docker/registry/config.yml
 
 参考链接：https://docs.docker.com/registry/deploying/#more-advanced-authentication</pre>
 </div>
+<div created="20210706095742722" draft.of="database" draft.title="database" modified="20230209143925443" tags="database backend" title="Draft of 'database'">
+<pre></pre>
+</div>
+<div created="20211203100802692" draft.of="docker" draft.title="docker" modified="20230209144710340" tags="backend docker" title="Draft of 'docker'">
+<pre></pre>
+</div>
 <div created="20210628074136333" modified="20210628074811439" tags="dubbo" title="dubbo 服务本地调用">
 <pre>使用 dubbo 的时候，当程序既是消费者又是提供者的时候，服务会优先使用本地调用
 在程序启动的时候可以看到：
@@ -15371,6 +15385,34 @@ firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p ICMP --icmp-
 firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p ICMP --icmp-type timestamp-reply -m comment --comment &quot;deny ICMP timestamp&quot; -j DROP
 
 firewall-cmd --direct --get-all-rules</pre>
+</div>
+<div created="20230209143933641" modified="20230209144703211" tags="geoserver gis" title="Geoserver 部署">
+<pre>
+启动报错
+
+```
+
+
+Welcome to GeoServer 2.22.0,
+Starting installation of extensions,
+Finished installation of extensions,
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED,
+[0.003s][warning][os,thread] Failed to start thread &quot;GC Thread#0&quot; - pthread_create failed (EPERM) for attributes: stacksize: 1024k, guardsize: 4k, detached.,
+#,
+# There is insufficient memory for the Java Runtime Environment to continue.,
+# Cannot create worker GC thread. Out of system resources.,
+# Can not save log file, dump to screen..,
+# Possible reasons:,
+#   The system is out of physical RAM or swap space,
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+```
+报错运行环境 dokcer：20.10.8
+
+升级 docker 版本到最新
+</pre>
+</div>
+<div created="20230209143851724" modified="20230209144719246" tags="gis TableOfContents" title="gis">
+<pre></pre>
 </div>
 <div created="20210724041511291" modified="20210916073437949" tags="harbor devops" title="harbor增加 https 支持">
 <pre>遇到的问题
