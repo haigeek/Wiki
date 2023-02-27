@@ -381,6 +381,8 @@ Error message and password prompt
 
 <li>tool</li>
 
+<li>ubuntu 安装后初始化</li>
+
 <li>vim命令备忘</li>
 
 <li>VMware vSphere 是什么</li>
@@ -14594,8 +14596,8 @@ Error message and password prompt
 <div created="20210706093928189" modified="20230213142238331" title="$:/state/toc/TableOfContents/backend-environment--118161433">
 <pre>close</pre>
 </div>
-<div created="20210802122703929" modified="20230209143844237" title="$:/state/toc/TableOfContents/backend-Linux--118161433">
-<pre>close</pre>
+<div created="20210802122703929" modified="20230226130509678" title="$:/state/toc/TableOfContents/backend-Linux--118161433">
+<pre>open</pre>
 </div>
 <div created="20210724041439508" modified="20230209143845489" title="$:/state/toc/TableOfContents/backend-MicroService--118161433">
 <pre>close</pre>
@@ -14618,7 +14620,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20230224082236543" list="docker-nginx-dns解析问题 docker devops Welcome" modified="20230224082236982" title="$:/StoryList">
+<div created="20230226064955405" list="[[ubuntu 安装后初始化]] Linux MicroService [[Linux 命令备忘]] Welcome" modified="20230226130510292" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15495,8 +15497,7 @@ git push -u origin master
 参考：https://stackoverflow.com/questions/50992188/how-to-push-a-shallow-clone-to-a-new-repo</pre>
 </div>
 <div created="20230214082000990" modified="20230214082457877" tags="[[ git]]" title="git 浅克隆远程分支">
-<pre>
-```
+<pre>```
 $ git clone --depth 1 https://github.com/dogescript/dogescript.git
 $ git remote set-branches origin 'remote_branch_name'
 $ git fetch --depth 1 origin remote_branch_name
@@ -15968,6 +15969,30 @@ apt-get install qt5-default
 </div>
 <div created="20230213142241999" modified="20230213142720680" tags="tool TableOfContents" title="tool">
 <pre></pre>
+</div>
+<div created="20230226130514053" modified="20230226155558479" tags="Linux" title="ubuntu 安装后初始化">
+<pre>启用root
+
+```
+## 启用 root
+sudo passwd root
+## 输入密码
+## 允许 root 远程登录
+
+```
+
+修改时间
+
+
+```
+## 选择时区
+tzselect
+## 拷贝
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+## 修改硬件时间
+sudo hwclock --systohc
+```
+</pre>
 </div>
 <div created="20210915013005233" modified="20210917154454008" tags="Linux" title="vim命令备忘">
 <pre>全文替换
