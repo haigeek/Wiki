@@ -197,6 +197,8 @@ Error message and password prompt
 
 <li>$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375</li>
 
+<li>$:/state/search-list/selected-item--874113614</li>
+
 <li>$:/state/search/currentTab</li>
 
 <li>$:/state/showeditpreview</li>
@@ -382,6 +384,8 @@ Error message and password prompt
 <li>tool</li>
 
 <li>ubuntu 安装后初始化</li>
+
+<li>ubuntu 开机自启动</li>
 
 <li>vim命令备忘</li>
 
@@ -14521,6 +14525,9 @@ Error message and password prompt
 <div created="20210621075707006" modified="20210621075707006" title="$:/state/plugin-info--467292644-$:/languages/zh-Hans---1911566375">
 <pre>contents</pre>
 </div>
+<div created="20230226160456073" modified="20230226160456264" title="$:/state/search-list/selected-item--874113614">
+<pre>ssh config-primaryList</pre>
+</div>
 <div created="20210621083029514" modified="20210816154128671" title="$:/state/search/currentTab">
 <pre>$:/core/ui/DefaultSearchResultList</pre>
 </div>
@@ -14620,7 +14627,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20230226064955405" list="[[ubuntu 安装后初始化]] Linux MicroService [[Linux 命令备忘]] Welcome" modified="20230226130510292" title="$:/StoryList">
+<div created="20230226064955405" list="[[ubuntu 开机自启动]] [[ssh config]] [[ubuntu 安装后初始化]] Linux MicroService [[Linux 命令备忘]] Welcome" modified="20230226160456951" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15970,7 +15977,7 @@ apt-get install qt5-default
 <div created="20230213142241999" modified="20230213142720680" tags="tool TableOfContents" title="tool">
 <pre></pre>
 </div>
-<div created="20230226130514053" modified="20230226155558479" tags="Linux" title="ubuntu 安装后初始化">
+<div created="20230226130514053" modified="20230227071212661" tags="Linux ubuntu" title="ubuntu 安装后初始化">
 <pre>启用root
 
 ```
@@ -15992,6 +15999,51 @@ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ## 修改硬件时间
 sudo hwclock --systohc
 ```
+</pre>
+</div>
+<div created="20230227071213459" modified="20230227072727021" tags="ubuntu Linux" title="ubuntu 开机自启动">
+<pre>
+复制 rc.local 服务
+
+```
+cp /usr/lib/systemd/system/rc-local.service /etc/systemd/system/
+
+```
+
+在`/usr/lib/systemd/system/rc-local.service`
+末尾几行添加，不添加的话执行 enable 会报错
+
+
+```
+[Install]
+WantedBy=multi-user.target
+elias=rc-local.service
+```
+
+
+新建 rc.local 文件，添加要执行的脚本
+
+
+```
+vim /etc/rc.local
+```
+
+文件样例
+
+```
+#!/bin/bash
+## 要执行的脚本
+exit 0
+```
+
+启用
+
+
+```
+systemctl start rc-local
+systemctl enable rc-local
+```
+
 </pre>
 </div>
 <div created="20210915013005233" modified="20210917154454008" tags="Linux" title="vim命令备忘">
