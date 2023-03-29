@@ -14631,7 +14631,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[vscode 安装go 插件]] go Welcome" title="$:/StoryList">
+<div created="20230328021544720" list="[[PG 命令备忘]] [[firewalled 防火墙]] Welcome" modified="20230328074732306" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15806,7 +15806,7 @@ server:
 需要注意这里的别名如果在生产的时候没有设置那么就不能配置，否则会提示no cipher suites in common 验证不能通过
 </pre>
 </div>
-<div created="20210715030423206" modified="20210811062425504" tags="postgresql" title="PG 命令备忘">
+<div created="20210715030423206" modified="20230328161034362" tags="postgresql" title="PG 命令备忘">
 <pre>数据的导出与导入
 
 1、导出整个数据库
@@ -15826,6 +15826,10 @@ psql  -U  username -d  dbname  -f  /var/lib/postgresql/data/backup/xxx.sql
 导出某个模式的数据
 
 pg_dump  -U  bicp  -d bicp -n collie -f  /var/lib/postgresql/data/bak/collie-20210811.sql
+
+空间库数据恢复
+pg_dump -U sde -d lishui -n public mypgdb1031.dump
+
 </pre>
 </div>
 <div created="20210712154024000" modified="20210712154242023" tags="postgresql" title="pg修改最大连接数">
@@ -16082,8 +16086,7 @@ https://www.cnblogs.com/lcword/p/17040096.html</pre>
 [[https://fuckcloudnative.io/posts/wireguard-docs-practice/]]</pre>
 </div>
 <div created="20230309140428392" modified="20230309140557661" tags="go" title="vscode 安装go 插件">
-<pre>
-```
+<pre>```
 ## 开启代理支持
 go env -w GO111MODULE=auto
 ## 设置七牛云代理
