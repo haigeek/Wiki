@@ -357,8 +357,6 @@ Error message and password prompt
 
 <li>neo4j 数据备份与还原</li>
 
-<li>office部分安装</li>
-
 <li>ops</li>
 
 <li>pem证书转换为pcks12</li>
@@ -14544,8 +14542,8 @@ Error message and password prompt
 <div created="20210623154222172" modified="20210625032721679" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20210621075845947" modified="20230729091848048" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20210621075845947" modified="20230729085421053" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210621075620857" modified="20210623160032594" title="$:/state/tab--1418380610">
 <pre>$:/core/ui/ControlPanel/Plugins/Add/Plugins</pre>
@@ -14640,7 +14638,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20230729083419325" list="office部分安装 Java环境变量配置 environment wireguard backend Welcome" modified="20230729083425908" title="$:/StoryList">
+<div created="20230729083419325" list="Java环境变量配置 environment wireguard backend Welcome" modified="20230729083425908" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -15807,39 +15805,6 @@ neo4j-admin load --from=data/neo4j20230112.dump --force
 
 
 
-</pre>
-</div>
-<div created="20230729091849247" modified="20230729105255959" tags="environment office" title="office部分安装" type="text/x-markdown">
-<pre>部署工具下载： https://www.microsoft.com/en-us/download/confirmation.aspx?id=49117
-
-解压部署工具到指定目录，注意新建一个文件夹，数据会解压到这个文件夹。
-
-编辑文件` configuration-Office365-x64.xml
-`
-```xml
-&lt;!-- E 表示iso装载后的路径 --&gt;
-  &lt;Add OfficeClientEdition=&quot;64&quot; SourcePath=&quot;E:\&quot;&gt;
-    &lt;Product ID=&quot;ProPlusRetail&quot;&gt;
-	    &lt;Language ID=&quot;zh-CN&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;Access&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;Groove&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;InfoPath&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;Lync&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;OneNote&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;Outlook&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;Publisher&quot; /&gt;
-        &lt;ExcludeApp ID=&quot;Skype for Business&quot; /&gt; 
-        &lt;ExcludeApp ID=&quot;SharePointDesigner&quot; /&gt; 
-    &lt;/Product&gt;
-  &lt;/Add&gt;
-
-```
-
-
-执行安装
-```
-setup.exe /configure  configuration-Office365-x64.xml
-```
 </pre>
 </div>
 <div created="20230213112145243" modified="20230213112210180" tags="TableOfContents ops" title="ops">
